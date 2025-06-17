@@ -1,0 +1,6 @@
+@BoatBackend_HostAddress = http://localhost:5002
+
+GET {{BoatBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
