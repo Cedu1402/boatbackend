@@ -1,27 +1,33 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using BoatBackend.Repositories;
+using BoatBackend.Interfaces;
+using BoatBackend.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BoatBackend.Services;
 
-public class AuthenticationService(UserRepository userRepository)
+public class AuthenticationService(IUserRepository userRepository, ILogger<AuthenticationService> logger)
 {
-    public async Task<string> Login(string name, string password)
-    {
-        var user = await userRepository.GetUserByName(name);
+    public static readonly string JwtKey =
+        "TESTKEEEEEEEEEEEEYYYYYYYYYYYYYYYYYYYYYYYYYYY"; // NOTE this should be secure with a secret manager or at least in a .env file in a real application.
 
-        if (user == null || user.Password == password) return string.Empty;
+    public async Task<string> Login(User user)
+    {
+        var existingUser = await userRepository.GetUserByName(user.Name);
+
+        if (existingUser == null || existingUser.Password != user.Password)
+        {
+            logger.LogInformation("Failed to login {UserName}", user.Name);
+            return string.Empty;
+        }
 
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
-        var jwtKey =
-            "TEST"; // NOTE this should be secure with a secret manager or at least in a .env file in a real application.
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey));
         var token = new JwtSecurityToken(
             null,
             null,

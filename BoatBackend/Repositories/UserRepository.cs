@@ -1,10 +1,11 @@
 ﻿using BoatBackend.Data;
+using BoatBackend.Interfaces;
 using BoatBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoatBackend.Repositories;
 
-public class UserRepository(AppDbContext dbContext, ILogger<UserRepository> logger)
+public class UserRepository(AppDbContext dbContext, ILogger<UserRepository> logger) : IUserRepository
 {
     public async Task<bool> CreateUser()
     {
@@ -35,7 +36,7 @@ public class UserRepository(AppDbContext dbContext, ILogger<UserRepository> logg
         }
         catch (Exception e)
         {
-            logger.LogError(e, "GetUserById failed {@Name}", name);
+            logger.LogError(e, "GetUserByName failed {@Name}", name);
             return null;
         }
     }

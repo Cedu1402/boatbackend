@@ -6,16 +6,18 @@ namespace BoatBackend.Repositories;
 
 public class BoatRepository(AppDbContext dbContext, ILogger<BoatRepository> logger)
 {
-    public async Task CreateBoat(Boat boat)
+    public async Task<Boat?> CreateBoat(Boat boat)
     {
         try
         {
             dbContext.Add(boat);
             await dbContext.SaveChangesAsync();
+            return boat;
         }
         catch (Exception e)
         {
             logger.LogError(e, "CreateBoat failed {@Boat}", boat);
+            return null;
         }
     }
 
@@ -45,18 +47,19 @@ public class BoatRepository(AppDbContext dbContext, ILogger<BoatRepository> logg
         }
     }
 
-    public async Task<bool> UpdateBoat(Boat boat)
+    public async Task<Boat?> UpdateBoat(Boat boat)
     {
         try
         {
+            logger.LogInformation("Update boat {id} {name}", boat.Id, boat.Name);
             dbContext.Boats.Update(boat);
             await dbContext.SaveChangesAsync();
-            return true;
+            return boat;
         }
         catch (Exception e)
         {
             logger.LogError(e, "UpdateBoat failed {@Boat}", boat);
-            return false;
+            return null;
         }
     }
 
@@ -64,6 +67,7 @@ public class BoatRepository(AppDbContext dbContext, ILogger<BoatRepository> logg
     {
         try
         {
+            logger.LogInformation("Delete boat {id}", id);
             var boat = await dbContext.Boats.FindAsync(id);
             if (boat == null) return false;
 

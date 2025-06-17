@@ -1,0 +1,7 @@
+﻿services:
+  boat-backend:
+    image: boat-backend
+    build:
+      context: .
+      dockerfile: BoatBackend/Dockerfile
+    

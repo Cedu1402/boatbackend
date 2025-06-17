@@ -1,22 +1,23 @@
-﻿using BoatBackend.Models;
+﻿using BoatBackend.Interfaces;
+using BoatBackend.Models;
 using BoatBackend.Repositories;
 
 namespace BoatBackend.Services;
 
-public class SetupService(UserRepository userRepository, BoatRepository boatRepository)
+public class SetupService(IUserRepository userRepository, BoatRepository boatRepository)
 {
     public async Task RunSetup()
     {
         await userRepository.CreateUser();
-        await boatRepository.CreateBoat(new Boat
+
+        for (var i = 0; i < 100; i++)
         {
-            Name = "Test1",
-            Description = "Test Boat 1"
-        });
-        await boatRepository.CreateBoat(new Boat
-        {
-            Name = "Test2",
-            Description = "Test Boat 2"
-        });
+            var repeatedChars = new string('k', i);
+            await boatRepository.CreateBoat(new Boat
+            {
+                Name = $"Test {i + 1}",
+                Description = $"Test boat {i + 1} {repeatedChars}"
+            });
+        }
     }
 }

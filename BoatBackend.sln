@@ -2,6 +2,13 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoatBackend", "BoatBackend\BoatBackend.csproj", "{A83E75C2-9860-4A55-BF86-DFADA24607FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoatBackendTest", "BoatBackendTest\BoatBackendTest.csproj", "{A87C170C-A4F0-4886-AD10-6FDACEDEEFEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D002C1A7-A450-411F-AA05-B3D094769F2C}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +19,9 @@ Global
 		{A83E75C2-9860-4A55-BF86-DFADA24607FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A83E75C2-9860-4A55-BF86-DFADA24607FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A83E75C2-9860-4A55-BF86-DFADA24607FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87C170C-A4F0-4886-AD10-6FDACEDEEFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87C170C-A4F0-4886-AD10-6FDACEDEEFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87C170C-A4F0-4886-AD10-6FDACEDEEFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87C170C-A4F0-4886-AD10-6FDACEDEEFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
