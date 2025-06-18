@@ -20,6 +20,11 @@ This is a simple ASP.NET Core backend using the Minimal API.
 
 ```bash
 dotnet run
+
 ```
 
-or with docker-compose up
+or with docker
+
+```bash
+dockercompose up
+```
