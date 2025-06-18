@@ -66,20 +66,23 @@ app.MapPost("/login", async (User user, AuthenticationService authService) =>
     })
     .WithName("Login");
 
-app.MapGet("/boat", async (BoatRepository repo) => await repo.GetAllBoats()).WithName("GetBoat")
+app.MapGet("/ping", () => "pong").WithName("Ping");
+
+app.MapGet("/boats", async (BoatRepository repo) => await repo.GetAllBoats()).WithName("GetBoat")
     .RequireAuthorization();
 
-app.MapGet("/boat/{id:int}", async (BoatRepository repo, int id) => await repo.GetBoatById(id))
+app.MapGet("/boats/{id:int}", async (BoatRepository repo, int id) => await repo.GetBoatById(id))
     .WithName("GetBoatById")
     .RequireAuthorization();
 
-app.MapPost("/boat", async (Boat boat, BoatRepository repo) => await repo.CreateBoat(boat)).WithName("AddBoat")
+app.MapPost("/boats", async (Boat boat, BoatRepository repo) => await repo.CreateBoat(boat)).WithName("AddBoat")
     .RequireAuthorization();
 
-app.MapDelete("/boat/{id:int}", async (BoatRepository repo, int id) => await repo.DeleteBoat(id)).WithName("DeleteBoat")
+app.MapDelete("/boats/{id:int}", async (BoatRepository repo, int id) => await repo.DeleteBoat(id))
+    .WithName("DeleteBoat")
     .RequireAuthorization();
 
-app.MapPut("/boat/", async (BoatRepository repo, Boat boat) => await repo.UpdateBoat(boat)).WithName("UpdateBoat")
+app.MapPut("/boats/", async (BoatRepository repo, Boat boat) => await repo.UpdateBoat(boat)).WithName("UpdateBoat")
     .RequireAuthorization();
 
 app.Run();
